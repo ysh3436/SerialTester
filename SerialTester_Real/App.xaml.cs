@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
-using System.Linq;
-using System.Threading.Tasks;
-using System.Windows;
+﻿using System.Windows;
 
 namespace SerialTester_Real
 {
@@ -13,5 +7,15 @@ namespace SerialTester_Real
     /// </summary>
     public partial class App : Application
     {
+        #region Constructors
+
+        private App()
+        {
+            Main main = new Main();
+            main.ShowDialog();
+        }
+
+        #endregion Constructors
+
     }
 }
