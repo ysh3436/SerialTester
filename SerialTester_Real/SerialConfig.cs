@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Web.Script.Serialization;
 
 namespace SerialTester_Real
 {
@@ -13,6 +14,7 @@ namespace SerialTester_Real
         public List<ResponseData> responseData;
         private string _filePath;
         private Jsonhandler<SerialConfig> _jsonhandler;
+        JavaScriptSerializer _jsonConvertor = new JavaScriptSerializer();
 
         #endregion Fields
 
@@ -38,23 +40,21 @@ namespace SerialTester_Real
         #endregion Destructors
 
         #region Methods
-
-        public void loadConfig()//string filePath)
+        
+        public SerialConfig loadConfigData(string filepath)
         {
-            SerialConfig data = _jsonhandler.loadConfig("d://test.json");
+            SerialConfig data = _jsonhandler.loadConfig(filepath);
             if (data == null)
             {
-                return;
+                return null;
             }
-            this.Port = data.Port;
-            this.Boardrate = data.Boardrate;
-            this.responseData = data.responseData;
-            return;
+            return data;
         }
 
         public void Save()
         {
             _jsonhandler.Save("d://test.json", this);
+            var temp = _jsonConvertor.Serialize(responseData);
             return;
         }
 

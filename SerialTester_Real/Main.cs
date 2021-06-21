@@ -64,7 +64,7 @@ namespace SerialTester_Real
             string[] comlist = System.IO.Ports.SerialPort.GetPortNames();
             //List<string> test= System.IO.Ports.SerialPort.GetPortNames().ToList;
             this.cbPort.ItemsSource = comlist.ToList<string>();
-            _config.loadConfig();
+            _config = _config.loadConfigData("d://test.json");//filepath 변수화 필요.
             this.tbBoardrate.Text = _config.Boardrate;
             this.cbPort.SelectedItem = _config.Port;
 

@@ -6,10 +6,11 @@ namespace SerialTester_Real
     public class Jsonhandler<T>
     {
         #region Constructors
+        JavaScriptSerializer _jsonConvertor;
 
         public Jsonhandler()
         {
-            //
+            _jsonConvertor = new JavaScriptSerializer();
         }
 
         #endregion Constructors
@@ -24,8 +25,7 @@ namespace SerialTester_Real
         public T loadConfig(string filePath)
         {
             if (!File.Exists(filePath)) return default(T);
-            T _data = default(T);
-            var _jsonConvertor = new JavaScriptSerializer();
+            T _data = default(T);;
 
             var _filePath = filePath;
 
@@ -38,12 +38,10 @@ namespace SerialTester_Real
         {
             try
             {
-                JavaScriptSerializer jsonConvertor = new JavaScriptSerializer();
+                string allText = _jsonConvertor.Serialize(config);
 
-                string allText = jsonConvertor.Serialize(config);
-
-                allText = allText.Replace(@"{", "{\r\n\t");
-                allText = allText.Replace(@",", ",\r\n\t");
+                //allText = allText.Replace(@"{", "{\r\n\t");
+                //allText = allText.Replace(@",", ",\r\n\t");
 
                 File.WriteAllText(path, allText);
 
